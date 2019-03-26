@@ -1,9 +1,9 @@
 <template>
     <div class="col-md-8 mt-3">
         <div class="card">
-            <div class="card-header">Publicado el 27/05/2018</div>
+            <div class="card-header">Publicado el {{ throught.create_at }}</div>
             <div class="card-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, voluptas tempora eos odit labore repellendus exercitationem, quaerat qui maiores maxime, velit distinctio obcaecati alias nam. Itaque expedita adipisci, sed labore!</p>
+                <p>{{ throught.description }}</p>
             </div>
 
             <div class="card-footer">
@@ -17,6 +17,17 @@
 
 <script>
     export default {
+        props:['throught'],
+        data(){
+            return {
+                throught:{
+                    id: '',
+                    description:'',
+                    create_at:''
+                }
+            };
+        },
+
         mounted() {
             console.log('Component mounted.')
         }
