@@ -8,7 +8,7 @@
 
             <div class="card-footer">
                 <button class="btn btn-light">Editar</button>
-                <button class="btn btn-danger">Eliminar</button>
+                <button class="btn btn-danger" v-on:click="onClickDelete()">Eliminar</button>
             </div>
         </div>
     </div>     
@@ -25,6 +25,11 @@
 
         mounted() {
             console.log('Component mounted.')
+        },
+        methods:{
+            onClickDelete(){
+                this.$emit('delete');
+            }
         }
     }
 </script>

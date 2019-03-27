@@ -5,9 +5,10 @@
             <form-component @new="addThrought"></form-component>
 
             <throught-component 
-                v-for="thought in throughts"
+                v-for="(thought, index) in throughts"
                 :key="thought.id"
-                :throught="thought"></throught-component>
+                :throught="thought"
+                @delete="deleteThrought(index)"></throught-component>
 
 
         </div>
@@ -33,6 +34,9 @@
         methods: {
             addThrought(thought){
                 this.throughts.push(thought);
+            },
+            deleteThrought(index){
+                this.throughts.splice(index,1)
             }
         }
     }
