@@ -20,11 +20,6 @@
         props:['throught'],
         data(){
             return {
-                throught:{
-                    id: '',
-                    description:'',
-                    create_at:''
-                }
             };
         },
 

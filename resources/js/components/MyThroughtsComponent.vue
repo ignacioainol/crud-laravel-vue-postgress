@@ -2,12 +2,12 @@
     <div class="container">
         <div class="row justify-content-center">
 
-            <form-component></form-component>
+            <form-component @new="addThrought"></form-component>
 
             <throught-component 
                 v-for="thought in throughts"
                 :key="thought.id"
-                :throught="{id:1,description:'zzz',create_at:'111'}"></throught-component>
+                :throught="thought"></throught-component>
 
 
         </div>
@@ -29,6 +29,11 @@
 
         mounted() {
             console.log('Component mounted.')
+        },
+        methods: {
+            addThrought(thought){
+                this.throughts.push(thought);
+            }
         }
     }
 </script>

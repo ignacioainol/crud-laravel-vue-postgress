@@ -1797,7 +1797,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     newThrought: function newThrought() {
-      alert(this.description);
+      var throught = {
+        id: 2,
+        description: this.description,
+        create_at: '11/22/2013'
+      };
+      this.$emit('new', throught);
+      this.description = '';
     }
   }
 });
@@ -1842,6 +1848,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     console.log('Component mounted.');
+  },
+  methods: {
+    addThrought: function addThrought(thought) {
+      this.throughts.push(thought);
+    }
   }
 });
 
@@ -1876,13 +1887,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['throught'],
   data: function data() {
-    return {
-      throught: {
-        id: '',
-        description: '',
-        create_at: ''
-      }
-    };
+    return {};
   },
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -36947,7 +36952,7 @@ var render = function() {
             on: {
               submit: function($event) {
                 $event.preventDefault()
-                return _vm.newThrought($event)
+                return _vm.newThrought()
               }
             }
           },
@@ -37016,12 +37021,12 @@ var render = function() {
       "div",
       { staticClass: "row justify-content-center" },
       [
-        _c("form-component"),
+        _c("form-component", { on: { new: _vm.addThrought } }),
         _vm._v(" "),
         _vm._l(_vm.throughts, function(thought) {
           return _c("throught-component", {
             key: thought.id,
-            attrs: { throught: { id: 1, description: "zzz", create_at: "111" } }
+            attrs: { throught: thought }
           })
         })
       ],
