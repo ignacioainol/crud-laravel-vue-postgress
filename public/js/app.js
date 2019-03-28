@@ -1837,6 +1837,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1856,6 +1857,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     deleteThrought: function deleteThrought(index) {
       this.throughts.splice(index, 1);
+    },
+    updateThrought: function updateThrought(index, throught) {
+      this.throughts[index] = throught;
     }
   }
 });
@@ -1888,10 +1892,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['throught'],
   data: function data() {
-    return {};
+    return {
+      editMode: false
+    };
   },
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -1899,6 +1907,14 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     onClickDelete: function onClickDelete() {
       this.$emit('delete');
+    },
+    onClickEdit: function onClickEdit() {
+      this.editMode = true;
+      this.$emit('edit');
+    },
+    onClickUpdate: function onClickUpdate() {
+      this.editMode = false;
+      this.$emit('update', throught);
     }
   }
 });
@@ -37039,6 +37055,15 @@ var render = function() {
             on: {
               delete: function($event) {
                 return _vm.deleteThrought(index)
+              },
+              update: function($event) {
+                var i = arguments.length,
+                  argsArray = Array(i)
+                while (i--) argsArray[i] = arguments[i]
+                return _vm.updateThrought.apply(
+                  void 0,
+                  [index].concat(argsArray)
+                )
               }
             }
           })
@@ -37077,11 +37102,57 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
-        _c("p", [_vm._v(_vm._s(_vm.throught.description))])
+        _vm.editMode
+          ? _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.throught.description,
+                  expression: "throught.description"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text" },
+              domProps: { value: _vm.throught.description },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.throught, "description", $event.target.value)
+                }
+              }
+            })
+          : _c("p", [_vm._v(_vm._s(_vm.throught.description))])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-footer" }, [
-        _c("button", { staticClass: "btn btn-light" }, [_vm._v("Editar")]),
+        _vm.editMode
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                on: {
+                  click: function($event) {
+                    return _vm.onClickUpdate()
+                  }
+                }
+              },
+              [_vm._v("Guardar Cambios")]
+            )
+          : _c(
+              "button",
+              {
+                staticClass: "btn btn-light",
+                on: {
+                  click: function($event) {
+                    return _vm.onClickEdit()
+                  }
+                }
+              },
+              [_vm._v("Editar")]
+            ),
         _vm._v(" "),
         _c(
           "button",

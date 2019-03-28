@@ -3,11 +3,13 @@
         <div class="card">
             <div class="card-header">Publicado el {{ throught.create_at }}</div>
             <div class="card-body">
-                <p>{{ throught.description }}</p>
+                <input v-if="editMode" type="text" v-model="throught.description" class="form-control">
+                <p v-else>{{ throught.description }}</p>
             </div>
 
             <div class="card-footer">
-                <button class="btn btn-light">Editar</button>
+                <button v-if="editMode" class="btn btn-success" v-on:click="onClickUpdate()">Guardar Cambios</button>
+                <button v-else class="btn btn-light" v-on:click="onClickEdit()">Editar</button>
                 <button class="btn btn-danger" v-on:click="onClickDelete()">Eliminar</button>
             </div>
         </div>
@@ -20,6 +22,7 @@
         props:['throught'],
         data(){
             return {
+                editMode: false
             };
         },
 
@@ -29,6 +32,14 @@
         methods:{
             onClickDelete(){
                 this.$emit('delete');
+            },
+            onClickEdit(){
+                this.editMode = true;
+                this.$emit('edit');
+            },
+            onClickUpdate(){
+                this.editMode = false;
+                this.$emit('update',throught);
             }
         }
     }

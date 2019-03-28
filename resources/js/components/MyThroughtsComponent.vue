@@ -8,7 +8,8 @@
                 v-for="(thought, index) in throughts"
                 :key="thought.id"
                 :throught="thought"
-                @delete="deleteThrought(index)"></throught-component>
+                @delete="deleteThrought(index)"
+                @update="updateThrought(index, ...arguments)"></throught-component>
 
 
         </div>
@@ -37,6 +38,9 @@
             },
             deleteThrought(index){
                 this.throughts.splice(index,1)
+            },
+            updateThrought(index,throught){
+                this.throughts[index] = throught;
             }
         }
     }
