@@ -1797,6 +1797,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     newThrought: function newThrought() {
+      var params = {
+        description: this.description
+      };
+      axios.post('/throughts', params).them(function (response) {
+        return console.log(response);
+      });
       var throught = {
         id: 2,
         description: this.description,

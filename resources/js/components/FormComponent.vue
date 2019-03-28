@@ -33,6 +33,14 @@
         },
         methods: {
             newThrought(){
+
+                const params = {
+                    description: this.description
+                };
+
+                axios.post('/throughts', params)
+                     .them((response) => console.log(response));
+
                 let throught = {
                     id: 2,
                     description: this.description,
